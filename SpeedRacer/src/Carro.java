@@ -129,14 +129,13 @@ public class Carro  implements Runnable {
 		Mapa m = jogo.getMapa();
 		boolean estaNaLargada = m.estaNaLargada((int) posx, (int) posy);
 	    while (thread == me) {
+	    	t1 = Calendar.getInstance().getTimeInMillis();
+	        try {
+	            Thread.sleep(1);
+	        } catch (InterruptedException e) {break;}
+	        t2 = Calendar.getInstance().getTimeInMillis();
+	        
 	    	if(!pausado && Controladora.instance.isModoJogo() && !jogo.estaRegressivo()){
-				t1 = Calendar.getInstance().getTimeInMillis();
-		        try {
-		            Thread.sleep(1);
-		        } catch (InterruptedException e) {break;}
-		        t2 = Calendar.getInstance().getTimeInMillis();
-		        
-		        
 		        if(!jogo.estaNaPoca(posx, posy)){
 		        	atualizarDirecao(t2, t1);
 			        atualizarVelocidade(t2, t1);
