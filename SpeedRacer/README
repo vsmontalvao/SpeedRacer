@@ -1,0 +1,16 @@
+SpeedRacer
+To play, follow the steps below:
+1. Install JRE (Java Runtime Environment): 
+		sudo apt-get install openjdk-7-jre (on Debian based linux distros)
+	or Download it here: http://www.oracle.com/technetwork/java/javase/downloads/index.html
+2. Download the game:
+	zip:
+	tar.xz:
+3. Extract the file
+	zip: unzip filename
+	tar.xz: tar xJvf filename
+4. If you have joysticks, run it with: 
+		java -jar -Djava.library.path=jinput SpeedRacer.jar 
+	If you don't have, simply run: 
+		java -jar SpeedRacer.jar
+5. Enjoy the game
