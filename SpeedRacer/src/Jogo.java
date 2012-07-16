@@ -31,9 +31,9 @@ public class Jogo {
 		tocador.adicionarMusica("sound/nothingtosay.mp3");    
 		tocador.adicionarMusica("sound/intothestorm.mp3"); 
 		tocador.adicionarMusica("sound/eagleflyfee.mp3");
-		tocador.adicionarMusica("sound/linesInTheSand.mp3");
-		tocador.adicionarMusica("sound/theScarecrow.mp3");
 		//Utilizar pasta sound_complete caso descomente as linhas abaixo
+		//tocador.adicionarMusica("sound_complete/linesInTheSand.mp3");
+		//tocador.adicionarMusica("sound_complete/theScarecrow.mp3");
 		//tocador.adicionarMusica("sound_complete/takeTheTime.mp3");
 		//tocador.adicionarMusica("sound_complete/spreadyourfire.mp3");
 		//tocador.adicionarMusica("sound_complete/waitingsilence.mp3");
