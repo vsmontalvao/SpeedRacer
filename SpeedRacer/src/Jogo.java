@@ -27,25 +27,26 @@ public class Jogo {
 	public Jogo(Controladora controller, Mapa m) {
 		this.c = controller;
 		mapa = m;
-		tocador.adicionarMusica("sound/theScarecrow.mp3");
-		tocador.adicionarMusica("sound/linesInTheSand.mp3");
-		tocador.adicionarMusica("sound/takeTheTime.mp3");     
-		tocador.adicionarMusica("sound/eagleflyfee.mp3");
-		tocador.adicionarMusica("sound/spreadyourfire.mp3");
 		tocador.adicionarMusica("sound/iwantout.mp3");
-		tocador.adicionarMusica("sound/nothingtosay.mp3");
-		tocador.adicionarMusica("sound/waitingsilence.mp3");
-		tocador.adicionarMusica("sound/thetempleofhate.mp3");
-		tocador.adicionarMusica("sound/intothestorm.mp3");
-		tocador.adicionarMusica("sound/mirrormirror.mp3");
-		tocador.adicionarMusica("sound/timestandsstill.mp3");
-		tocador.adicionarMusica("sound/thorn.mp3");
-		tocador.adicionarMusica("sound/rebellionindreamland.mp3");
-		tocador.adicionarMusica("sound/lastbeforethestorm.mp3");
-		tocador.adicionarMusica("sound/sendmeasign.mp3");
-		tocador.adicionarMusica("sound/spaceeater.mp3");
-		tocador.adicionarMusica("sound/thesilence.mp3");
-		tocador.adicionarMusica("sound/thetempleofhate.mp3");
+		tocador.adicionarMusica("sound/nothingtosay.mp3");    
+		tocador.adicionarMusica("sound/intothestorm.mp3"); 
+		tocador.adicionarMusica("sound/eagleflyfee.mp3");
+		tocador.adicionarMusica("sound/linesInTheSand.mp3");
+		tocador.adicionarMusica("sound/theScarecrow.mp3");
+		//Utilizar pasta sound_complete caso descomente as linhas abaixo
+		//tocador.adicionarMusica("sound_complete/takeTheTime.mp3");
+		//tocador.adicionarMusica("sound_complete/spreadyourfire.mp3");
+		//tocador.adicionarMusica("sound_complete/waitingsilence.mp3");
+		//tocador.adicionarMusica("sound_complete/thetempleofhate.mp3");
+		//tocador.adicionarMusica("sound_complete/mirrormirror.mp3");
+		//tocador.adicionarMusica("sound_complete/timestandsstill.mp3");
+		//tocador.adicionarMusica("sound_complete/thorn.mp3");
+		//tocador.adicionarMusica("sound_complete/rebellionindreamland.mp3");
+		//tocador.adicionarMusica("sound_complete/lastbeforethestorm.mp3");
+		//tocador.adicionarMusica("sound_complete/sendmeasign.mp3");
+		//tocador.adicionarMusica("sound_complete/spaceeater.mp3");
+		//tocador.adicionarMusica("sound_complete/thesilence.mp3");
+		//tocador.adicionarMusica("sound_complete/thetempleofhate.mp3");
 		tocador.start();
 		new ContadorRegressivo();
 	}

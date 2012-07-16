@@ -243,7 +243,7 @@ public class Display extends JPanel implements Runnable{
 
     	FontMetrics metrics = g.getFontMetrics();
     	//int fontHeight = metrics.getHeight();
-    	if(jogo.estaRegressivo() && metrics != null){
+    	if(jogo.estaRegressivo() && metrics != null && jogo.getRegressivo()!=null){
     		g.drawString(jogo.getRegressivo(), c.getWidth()/2 - g.getFontMetrics().stringWidth(jogo.getRegressivo())/2,
 	    			c.getHeight()/2 + g.getFontMetrics().getHeight()/2);
 		}
@@ -252,7 +252,7 @@ public class Display extends JPanel implements Runnable{
 	    			c.getHeight()/2 + g.getFontMetrics().getHeight()/2);
     	}
 		
-	}
+	} 
 	private void imprimirXY(Graphics2D g, int f, int x, int width) {
 		
 		g.setPaint ( jogo.getFundo() );
