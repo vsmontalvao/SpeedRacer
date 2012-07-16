@@ -297,19 +297,19 @@ public class Carro  implements Runnable {
 	private void atualizarDirecao(long t2, long t1) {
 		if(direita && ! esquerda){
     		if (Math.abs(vel) > 600)
-    			direcao += Math.toRadians(0.10);
+    			direcao += Math.toRadians(0.12)*(t2 - t1);
     		else if(Math.abs(vel) > 300 && Math.abs(vel) < 600)
-    			direcao += Math.toRadians(0.20);
+    			direcao += Math.toRadians(0.20)*(t2 - t1);
     		else if(Math.abs(vel) > 10)
-    			direcao += Math.toRadians(0.25);
+    			direcao += Math.toRadians(0.25)*(t2 - t1);
     	}
     	else if(! direita && esquerda){
     		if (Math.abs(vel) > 600)
-    			direcao += Math.toRadians(-0.10);
+    			direcao += Math.toRadians(-0.12)*(t2 - t1);
     		else if(Math.abs(vel) > 300 && Math.abs(vel) < 600)
-    			direcao += Math.toRadians(-0.20);
+    			direcao += Math.toRadians(-0.20)*(t2 - t1);
     		else if(Math.abs(vel) > 10)
-    			direcao += Math.toRadians(-0.25);
+    			direcao += Math.toRadians(-0.25)*(t2 - t1);
     	}
         direcao %= 2*Math.PI;
 	}

@@ -258,7 +258,7 @@ public class Display extends JPanel implements Runnable{
     	String pause = "Parado";
 
     	FontMetrics metrics = g.getFontMetrics();
-    	//int fontHeight = metrics.getHeight();
+
     	if(jogo.estaRegressivo() && metrics != null && jogo.getRegressivo()!=null){
     		g.drawString(jogo.getRegressivo(), c.getWidth()/2 - g.getFontMetrics().stringWidth(jogo.getRegressivo())/2,
 	    			c.getHeight()/2 + g.getFontMetrics().getHeight()/2);
