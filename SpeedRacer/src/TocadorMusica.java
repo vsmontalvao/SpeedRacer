@@ -10,6 +10,7 @@ public class TocadorMusica extends Thread {
    Player plr[] = new Player[100];
    boolean tocando = false;
    private int numMusicas = 0, atual;
+private boolean repetir = false;
    
    public TocadorMusica(String musica){
 	   adicionarMusica(musica);  	 
@@ -41,6 +42,8 @@ public class TocadorMusica extends Thread {
 						e.printStackTrace();}
 				   if(!tocando)
 					   break;
+				   if(!repetir)
+					   tocando = false;
 			   }
 		   }
 	   }
@@ -51,6 +54,9 @@ public class TocadorMusica extends Thread {
    }
 	public void passarMusica() {
 		plr[atual].close();		
+	}
+	public void setRepetir(){
+		repetir = true;
 	}
    
 }  

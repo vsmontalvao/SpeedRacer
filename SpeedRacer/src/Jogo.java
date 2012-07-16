@@ -27,6 +27,7 @@ public class Jogo {
 	public Jogo(Controladora controller, Mapa m) {
 		this.c = controller;
 		mapa = m;
+		tocador.setRepetir();
 		tocador.adicionarMusica("sound/iwantout.mp3");
 		tocador.adicionarMusica("sound/nothingtosay.mp3");    
 		tocador.adicionarMusica("sound/intothestorm.mp3"); 

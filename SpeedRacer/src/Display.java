@@ -29,14 +29,21 @@ public class Display extends JPanel implements Runnable{
 	private int modoVisual = 0;
 	private AffineTransform affineTransform = new AffineTransform();
 	protected Estatisticas estatisticas; 
+	Double razao;
 	
 	public Display(Controladora c){
 		this.c = c;
-
 		menu = c.getMenu();
 		start();
 	}
 	public void paintComponent(Graphics g){
+		int w = getWidth(), h = getHeight();
+		if(w>100)
+			c.setWidth(w);
+		if(h>100)
+			c.setHeight(h);
+		razao =  (double)(h)/709;
+		
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 	                RenderingHints.VALUE_ANTIALIAS_ON);
@@ -59,13 +66,16 @@ public class Display extends JPanel implements Runnable{
 		
 		g.drawImage(estatisticas.getFundo(), 0, 0, null);
 		
-	    int linha = 40;
+	    int linha = (int) (40*razao);
 	    int coluna = c.getWidth()/2;
 	    int extra = 80;
-	    g.drawImage(logo, coluna - logo.getWidth()/2, linha, null);   
-	    linha += logo.getHeight() + 70;
+	    AffineTransform af = new AffineTransform();
+	    af.translate(coluna - razao*logo.getWidth()/2, linha);
+	    af.scale(razao, razao);	    
+	    g.drawImage(logo, af, null);
+	    linha += (logo.getHeight() + 70)*razao;
 	    
-    	g.setFont(new Font("Sans", Font.BOLD, 54));
+    	g.setFont(new Font("Sans", Font.BOLD, (int) (54*razao)));
     	FontMetrics metrics = g.getFontMetrics();
     	int fontHeight = metrics.getHeight();
 		g.setPaint(new GradientPaint(0, linha - fontHeight, new Color(100,100,100), c.getWidth()/2,
@@ -73,10 +83,10 @@ public class Display extends JPanel implements Runnable{
 	    g.drawString(estatisticas.getTitulo(), coluna - metrics.stringWidth(estatisticas.getTitulo())/2,
     			linha);
 	    
-    	linha+=fontHeight + 50;
+    	linha+=fontHeight + 50*razao;
     	int linhaInicial = linha;
     	
-    	g.setFont(new Font("Sans", Font.BOLD, 32));
+    	g.setFont(new Font("Sans", Font.BOLD, (int) (32*razao)));
     	metrics = g.getFontMetrics();
     	fontHeight = metrics.getHeight();
     	g.setColor(new Color(200, 220, 230));
@@ -89,7 +99,7 @@ public class Display extends JPanel implements Runnable{
 	    		if(estatisticas.getElemento(i).equalsIgnoreCase("novo jogo"))
 	    			col = c.getWidth() * 3/4;
 	    		
-	    		int lbaixo= c.getHeight() - fontHeight - 60;
+	    		int lbaixo= (int) (c.getHeight() - fontHeight - 60*razao);
 	    		if(i == estatisticas.getLocalAtual()){
 		    		g.setPaint(new GradientPaint(col - metrics.stringWidth(texto)/2
 		    				- extra, c.getHeight() - 20, new Color(95, 169, 215,0), col,
@@ -111,7 +121,7 @@ public class Display extends JPanel implements Runnable{
 	    		}
 	    		g.setColor(Color.WHITE);
 	    		g.drawString(texto, coluna - metrics.stringWidth(texto)/2, linha);
-	    		linha += fontHeight + 5;
+	    		linha += fontHeight + 5*razao;
 	    	}
 	    }
 	}
@@ -122,13 +132,17 @@ public class Display extends JPanel implements Runnable{
 		
 		g.drawImage(menu.getFundo(), 0, 0, null);
 		
-	    int linha = 40;
+	    int linha = (int) (40*razao);
 	    int coluna = c.getWidth()/2;
 	    int extra = 80;
-	    g.drawImage(logo, coluna - logo.getWidth()/2, linha, null);   
-	    linha += logo.getHeight() + 70;
+	    AffineTransform af = new AffineTransform();
+	    af.translate(coluna - razao*logo.getWidth()/2, linha);
+	    af.scale(razao, razao);	    
+	    g.drawImage(logo, af, null);
 	    
-    	g.setFont(new Font("Sans", Font.BOLD, 54));
+	    linha += (logo.getHeight() + 70)*razao;
+	    
+    	g.setFont(new Font("Sans", Font.BOLD, (int) (54*razao)));
     	FontMetrics metrics = g.getFontMetrics();
     	int fontHeight = metrics.getHeight();
 		g.setPaint(new GradientPaint(0, linha - fontHeight, new Color(100,100,100), c.getWidth()/2,
@@ -138,32 +152,34 @@ public class Display extends JPanel implements Runnable{
     			linha);
 	    
     	
-    	int linhaimagem = linha + 90;
+    	int linhaimagem = (int) (linha + 90*razao);
     	if(titulo.equalsIgnoreCase("Mapa") || titulo.contains("Carro")){
     		Image imagemMenu = menu.getImagem();
-    		linha -= 40;
+    		linha -= 40*razao;
     		coluna = c.getWidth()*3/4;
     		if(titulo.equalsIgnoreCase("Mapa")){
 	    		g.setPaint ( menu.getFundoIcon() );
-	    		g.fillRect ( c.getWidth()*13/40 - imagemMenu.getWidth(null)/2, linhaimagem - fontHeight,
-	    				imagemMenu.getWidth(null), imagemMenu.getHeight(null) );
+	    		g.fillRect ( (int) (c.getWidth()*13/40 - razao*imagemMenu.getWidth(null)/2), linhaimagem - fontHeight,
+	    				(int) (razao*imagemMenu.getWidth(null)), (int) (razao*imagemMenu.getHeight(null)) );
     		}
-    		g.drawImage(imagemMenu, c.getWidth()*13/40 - imagemMenu.getWidth(null)/2, 
-    			linhaimagem - fontHeight, imagemMenu.getWidth(null), imagemMenu.getHeight(null), null);
+    		af = new AffineTransform();
+    	    af.translate(c.getWidth()*13/40 - razao*imagemMenu.getWidth(null)/2, linhaimagem - fontHeight);
+    	    af.scale(razao, razao);	    
+    	    g.drawImage(imagemMenu, af, null);
     		extra /= 2;
     	}
-    	linha+=fontHeight + 50;
+    	linha+=fontHeight + 50*razao;
     	
 	    for(int i=0; i<menu.getNumElementos(); i++){ 
 	    	if(menu.getTitulo().equalsIgnoreCase("Controles")){
 	    		coluna = 60;
 	    		if(!menu.getElemento(i).equalsIgnoreCase("voltar")){
-		    		g.setFont(new Font("Sans", Font.BOLD, 22));
+		    		g.setFont(new Font("Sans", Font.BOLD, (int) (22*razao)));
 		        	metrics = g.getFontMetrics();
 		        	fontHeight = metrics.getHeight();
 		        	g.setColor(Color.WHITE);
 		        	if(i == 0){
-		        		linha -= 60;
+		        		linha -= 60*razao;
 		        		g.drawString("MultiPlayer", 890, linha);
 		        		g.drawString("Joystick         SinglePlayer                        "+
 		        		"          Jogador1                        Jogador2 ", 190, (linha+=fontHeight*1.5));
@@ -173,7 +189,7 @@ public class Display extends JPanel implements Runnable{
 	    		else{
 	    			linha += fontHeight;
 	    			coluna = c.getWidth()/2 - metrics.stringWidth(menu.getElemento(i))/2;
-	    			g.setFont(new Font("Sans", Font.BOLD, 36));
+	    			g.setFont(new Font("Sans", Font.BOLD, (int) (36*razao)));
 		        	metrics = g.getFontMetrics();
 		        	fontHeight = metrics.getHeight();
 		        	g.setColor(new Color(200, 220, 230));
@@ -190,15 +206,15 @@ public class Display extends JPanel implements Runnable{
 	    		linha += fontHeight*1.5;
 	    	}
 	    	else{
-	    		g.setFont(new Font("Sans", Font.BOLD, 36));
+	    		g.setFont(new Font("Sans", Font.BOLD, (int) (36*razao)));
 	        	metrics = g.getFontMetrics();
 	        	fontHeight = metrics.getHeight();
 	        	g.setColor(new Color(200, 220, 230));
 	    		
 		    	if(menu.getElemento(i).equalsIgnoreCase("voltar")){
-		    		linha += 30;
+		    		linha += 30*razao;
 		    		if(menu.getTitulo().equalsIgnoreCase("carro"))
-		    			linha += 50;
+		    			linha += 50*razao;
 		    	}
 		    	if(i == menu.getLocalAtual()){
 		    		g.setPaint(new GradientPaint(coluna - metrics.stringWidth(menu.getElemento(i))/2
@@ -207,11 +223,11 @@ public class Display extends JPanel implements Runnable{
 		    	    g.fillOval(coluna - metrics.stringWidth(menu.getElemento(i))/2 - extra, 
 		    	    		linha - fontHeight, metrics.stringWidth(menu.getElemento(i)) + 2 * extra, fontHeight*3/2);
 		    	    if(menu.getTitulo().contains("Carro") && c.isMultiplayer()){
-		    	    	g.setFont(new Font("Sans", Font.BOLD, 14));
+		    	    	g.setFont(new Font("Sans", Font.BOLD, (int) (14*razao)));
 			    	    g.setColor(Color.GREEN);
 			    	    g.drawString("Jogador"+Integer.toString(c.getControle()), coluna + metrics.stringWidth(menu.getElemento(i))/2 + extra,
 				    			linha);
-			    	    g.setFont(new Font("Sans", Font.BOLD, 36));
+			    	    g.setFont(new Font("Sans", Font.BOLD, (int) (36*razao)));
 		    	    }
 		    	    g.setColor(Color.WHITE);
 		    	}
@@ -221,8 +237,8 @@ public class Display extends JPanel implements Runnable{
 		    	linha += fontHeight*1.5;
 		    	if(menu.getElemento(i).equalsIgnoreCase("Próximo") || menu.getElemento(i).equalsIgnoreCase("iniciar jogo")){
 		    		if(menu.getTitulo().equalsIgnoreCase("carro"))
-		    			linha += 50;
-		    		linha += 30;
+		    			linha += 50*razao;
+		    		linha += 30*razao;
 		    	}
 	    	}
 	    }
@@ -238,7 +254,7 @@ public class Display extends JPanel implements Runnable{
 			
 			imprimirXY(g, foco2, c.getWidth()/2, c.getWidth()/2);
 		}
-		g.setFont(new Font("Sans", Font.BOLD, 80));
+		g.setFont(new Font("Sans", Font.BOLD, (int) (140*razao)));
     	String pause = "Parado";
 
     	FontMetrics metrics = g.getFontMetrics();
@@ -320,12 +336,12 @@ public class Display extends JPanel implements Runnable{
 	    	}
 	    }	
 		
-		g.setFont(new Font("Sans", Font.BOLD, 20));
+		g.setFont(new Font("Sans", Font.BOLD, (int) (20*razao)));
     	FontMetrics metrics = g.getFontMetrics();
     	int fontHeight = metrics.getHeight();
     	g.setColor(Color.WHITE);
     	
-    	int linha = 20, coluna = x + 40;
+    	int linha = (int) (20*razao), coluna = x + 40;
     	//g.drawString(Integer.toString((int) (jogo.getDirecaoCarro(f) * 180/Math.PI)%360)+'°', x + 40, 60 + fontHeight);
     	g.drawString(jogo.getNome(f), coluna + 60, (linha+=fontHeight));
     	g.drawString("Volta: " + Integer.toString(jogo.getNumTempoVoltasCarro(f)), coluna, (linha+=fontHeight));
@@ -336,15 +352,15 @@ public class Display extends JPanel implements Runnable{
     	g.drawString("Tempo Volta: " + Double.toString(jogo.getTempoVoltaCarro(f)), coluna, (linha+=fontHeight));
     	g.drawString("Velocidade: " + Integer.toString(jogo.getVelCarro(f)/5) + " km/h", coluna, (linha+=fontHeight));
     	
-    	linha += 5 + fontHeight;
+    	linha += 5*razao + fontHeight;
     	String stamina = "Nitro: " + jogo.getStamina(f);
     	g.drawString(stamina, coluna + 100 - g.getFontMetrics().stringWidth(stamina)/2, linha);
-    	g.setPaint(new GradientPaint(coluna, (linha+=10) + 30, new Color(150,150,150), coluna, linha, new Color(220,220,220)));
-    	g.fillRoundRect(coluna, linha, 200, 30, 10, 30);
-    	g.setPaint(new GradientPaint(coluna, linha + 30, new Color(70,110,200), coluna, linha, new Color(180,210,255)));
-    	g.fillRoundRect(coluna, linha, (int) (jogo.getStamina(f)*2), 30, 10, 30);
+    	g.setPaint(new GradientPaint(coluna, (float) ((linha+=10*razao) + 15*razao), new Color(150,150,150), coluna, linha, new Color(220,220,220)));
+    	g.fillRoundRect(coluna, linha, 200, (int) (30*razao), 10, 30);
+    	g.setPaint(new GradientPaint(coluna, (float) (linha + 15*razao), new Color(70,110,200), coluna, linha, new Color(180,210,255)));
+    	g.fillRoundRect(coluna, linha, (int) (jogo.getStamina(f)*2), (int) (30*razao), 10, 30);
     	
-		linha = 20;
+		linha = (int) (20*razao);
 		BufferedImage mMapa  =  jogo.getMiniMapa();
 		int w = mMapa.getWidth(), h = mMapa.getHeight();
 		if(mMapa != null){

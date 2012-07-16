@@ -50,7 +50,7 @@ public class Controladora {
 	
 	public Controladora(){
 		width = 1366;
-		height = 900;
+		height = 709;
 		try{
 			logo = ImageIO.read(new File("img/logo.png"));	
 		}catch(Exception e){};
@@ -276,7 +276,7 @@ public class Controladora {
 		return width;
 	}
 	public int getHeight() {
-		return height - 186;
+		return height;
 	}
 
 	public Display getDisplay() {
@@ -510,6 +510,12 @@ public class Controladora {
 	}
 	public int getControle(){
 		return controle;
+	}
+	public void setWidth(int w){
+		width = w;
+	}
+	public void setHeight(int h){
+		height = h;
 	}
 	
 }
